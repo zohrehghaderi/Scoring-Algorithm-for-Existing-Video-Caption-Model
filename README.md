@@ -17,7 +17,7 @@ import cv2
 class Video_Caption_Loader(Dataset):
    def __init__(self, config):
         """
-        config: file path for network config [a link](https://github.com/zohrehghaderi/Scoring-Algorithm-for-Existing-Video-Caption-Model/blob/main/swin_base_bert.py)
+        config: file path for network ../swin_base_bert.py
         """
         self.confige=config
         if isinstance(config, str):
