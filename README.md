@@ -40,8 +40,9 @@ class Video_Caption_Loader(Dataset):
             num_clips=1
         )
         data = self.transformer_video(data)
-        images = collate([data], samples_per_gpu=1)['imgs']
-        images = images.squeeze(0)
+        images = collate([data], samples_per_gpu=1)['imgs'] # image shape:[1, 3, 32, 224, 224] [batch size, channel, number frame, height, weight]
+        
+        images = images.squeeze(0) # image shape:[1, 1, 3, 32, 224, 224]
 
        
 
