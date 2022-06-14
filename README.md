@@ -7,6 +7,12 @@ Existing-Video-Caption-Model code is available: [a link](https://github.com/ECCV
 First Step: Data loader
 1. you should have a dataloader class 
 ```
+import numpy as np
+from torch.utils.data import Dataset
+from mmaction.datasets.pipelines import Compose
+from mmcv.parallel import collate, scatter
+import mmcv
+import cv2
 
 class Video_Caption_Loader(Dataset):
    def __init__(self, config):
