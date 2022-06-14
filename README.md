@@ -4,7 +4,7 @@
 
 Existing-Video-Caption-Model code is available: [a link](https://github.com/ECCV7129/ECCV2022_submission_7129)
 
-First Step: Data loader
+#First Step: Data loader
 1. you should have a dataloader class 
 ```
 import numpy as np
@@ -46,7 +46,7 @@ class Video_Caption_Loader(Dataset):
             num_clips=1
         )
         data = self.transformer_video(data)
-        images = collate([data], samples_per_gpu=1)['imgs'] # image shape:[1, 3, 32, 224, 224] [batch size, channel, number frame, height, width]
+        images = collate([data], samples_per_gpu=1)['imgs'] # image shape:[1, 3, 32, 224, 224] [batch size, channel, number of frames, height, width]
         
         images = images.squeeze(0) # image shape:[1, 1, 3, 32, 224, 224]
 
@@ -57,4 +57,18 @@ class Video_Caption_Loader(Dataset):
     def __len__(self):
         return self.dataset['video_name'].__len__()
 ```
+
+#Second step: loading model
+it is better you read how to load a model in pytorch [a link](https://forums.pytorchlightning.ai/t/how-to-load-and-use-model-checkpoint-ckpt/677)
+
+1. you create model   
+``` 
+from Swin_BERT_Semantics import Swin_BERT_Semantics
+
+model = Swin_BERT_Semantics(mlp_freeze=False, swin_freeze=True, in_size=1024, hidden_sizes=[2048, 1024], out_size=768, drop_swin=0, max_length=20,
+                                            drop_mlp=0.1, drop_bert=0.3, bs=2,
+                                            config_data=config,
+                                            checkpoint_encoder=checkpoint_encoder)
+```
+
 
