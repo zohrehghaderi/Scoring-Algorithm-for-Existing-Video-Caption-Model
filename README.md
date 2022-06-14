@@ -36,7 +36,7 @@ class Video_Caption_Loader():
 
         # video prepartion with mmcv library
         data = dict(
-            filename=video_file,
+            filename=video_path,
             label=-1,
             start_index=0,
             modality='RGB',
