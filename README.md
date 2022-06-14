@@ -71,4 +71,5 @@ model = Swin_BERT_Semantics(mlp_freeze=False, swin_freeze=True, in_size=1024, hi
                                             checkpoint_encoder=checkpoint_encoder)
 ```
 
+2. download model checkpoint from this link [a link]()
 
