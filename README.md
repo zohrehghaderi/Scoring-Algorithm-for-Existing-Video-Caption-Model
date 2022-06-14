@@ -4,7 +4,7 @@
 
 Existing-Video-Caption-Model code is available: [a link](https://github.com/ECCV7129/ECCV2022_submission_7129)
 
-#First Step: Data loader
+## First Step: Data loader
 1. you should have a dataloader class 
 ```
 import numpy as np
@@ -58,7 +58,7 @@ class Video_Caption_Loader(Dataset):
         return self.dataset['video_name'].__len__()
 ```
 
-#Second step: loading model
+## Second step: loading model
 it is better you read how to load a model in pytorch [a link](https://forums.pytorchlightning.ai/t/how-to-load-and-use-model-checkpoint-ckpt/677)
 
 1. you create model   
