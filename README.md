@@ -4,7 +4,7 @@
 
 Existing-Video-Caption-Model code is available: [a link](https://github.com/ECCV7129/ECCV2022_submission_7129)
 
-first Step: Data loader
+First Step: Data loader
 1. you should have a dataloader class 
 ```
 
