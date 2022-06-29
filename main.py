@@ -18,14 +18,12 @@ if in_video is not None:
 
 
 # uncomment to see pictures in cv2 window
-    # for batch in images:
-    #     for frames in batch:
-    #         for frame in frames:
-    #             im = frame.numpy()
-    #             print(im.shape)
-    #
-    #
-    #             cv2.imshow('Pic', im)
-    #
-    #             cv2.waitKey(0)
-    #             cv2.destroyAllWindows()
+    for batch in images:
+        for frames in batch:
+            for frame in frames:
+                im = frame.numpy()
+                st.image(im, clamp=True)
+                # cv2.imshow('Pic', im)
+                #
+                # cv2.waitKey(0)
+                # cv2.destroyAllWindows()
