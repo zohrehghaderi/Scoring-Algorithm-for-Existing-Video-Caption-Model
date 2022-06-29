@@ -1,0 +1,7 @@
+timm
+scipy
+decord
+mmcv==1.3.9
+opencv-python
+torch
+numpy
