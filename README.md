@@ -49,8 +49,7 @@ class Video_Caption_Loader():
         
         images = images.squeeze(0) # image shape:[1, 1, 3, 32, 224, 224]
 
-       
-
+      
         return images
 
    
