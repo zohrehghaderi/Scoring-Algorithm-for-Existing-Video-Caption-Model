@@ -73,7 +73,7 @@ model.freeze()
 model.eval()
 
 images=yourdataloader.__getitem__(video_path)
-image = image.to(device)
+images = images.to(device)
 
 output = model(images)
 
