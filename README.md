@@ -69,7 +69,6 @@ model = Swin_BERT_Semantics(mlp_freeze=False, swin_freeze=True, in_size=1024, hi
 path_model='....\VASTA.ckpt'
 checkpoint = torch.load(path_model, map_location=device)
 model.load_state_dict(checkpoint['state_dict'])
-model.freeze()
 model.eval()
 
 images=yourdataloader.__getitem__(video_path)
