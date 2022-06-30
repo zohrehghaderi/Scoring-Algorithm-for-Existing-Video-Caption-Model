@@ -53,8 +53,7 @@ class Video_Caption_Loader():
 
         return images
 
-    def __len__(self):
-        return self.dataset['video_name'].__len__()
+   
 ```
 
 ## Second step: loading model
@@ -64,10 +63,24 @@ it is better you read how to load a model in pytorch [a link](https://forums.pyt
 ``` 
 from Swin_BERT_Semantics import Swin_BERT_Semantics
 
-model = Swin_BERT_Semantics(mlp_freeze=False, swin_freeze=True, in_size=1024, hidden_sizes=[2048, 1024], out_size=768, drop_swin=0, max_length=20,
-                                            drop_mlp=0.1, drop_bert=0.3, bs=2,
-                                            config_data=config,
-                                            checkpoint_encoder=checkpoint_encoder)
+device = 'cpu'
+
+model = Swin_BERT_Semantics(mlp_freeze=False, swin_freeze=True, in_size=1024, hidden_sizes=[2048, 1024], out_size=768, drop_bert=0, max_length=20)
+
+checkpoint = torch.load(path_model, map_location=device)
+model.load_state_dict(checkpoint['state_dict'])
+model.freeze()
+model.eval()
+
+images=yourdataloader.__getitem__(video_path)
+image = image.to(device)
+
+output = model(images)
+
+generate_text = output.cpu().numpy().tolist()
+
+generate_converted = model.tokenizer.batch_decode(generate_text, skip_special_tokens=True)
+
 ```
 
 2. download model checkpoint from this link [a link]()
