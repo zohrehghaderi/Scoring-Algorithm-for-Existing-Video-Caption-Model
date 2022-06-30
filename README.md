@@ -66,7 +66,7 @@ from Swin_BERT_Semantics import Swin_BERT_Semantics
 device = 'cpu'
 
 model = Swin_BERT_Semantics(mlp_freeze=False, swin_freeze=True, in_size=1024, hidden_sizes=[2048, 1024], out_size=768, drop_bert=0, max_length=20)
-
+path_model='....\VASTA.ckpt'
 checkpoint = torch.load(path_model, map_location=device)
 model.load_state_dict(checkpoint['state_dict'])
 model.freeze()
@@ -83,5 +83,5 @@ generate_converted = model.tokenizer.batch_decode(generate_text, skip_special_to
 
 ```
 
-2. download model checkpoint from this link [a link]()
+2. download model checkpoint from this link [a link](https://drive.google.com/drive/folders/16NurvuFhPTRJb_lo7iddOD67A47u7dgQ)
 
