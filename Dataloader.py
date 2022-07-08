@@ -13,7 +13,7 @@ class Video_Caption_Loader():
         """
         config: file path for network ../swin_base_bert.py
         """
-        self.confige = config
+        self.config = config
         if isinstance(config, str):
             self.cfg = mmcv.Config.fromfile(config)
         self.transformer_video = self.cfg.transformer_video
@@ -41,7 +41,7 @@ class Video_Caption_Loader():
         images = collate([data], samples_per_gpu=1)[
             'imgs']  # image shape:[1, 3, 32, 224, 224] [batch size, channel, number of frames, height, width]
 
-        images = images.squeeze(0)  # image shape:[1, 1, 3, 32, 224, 224]
+        #images = images.squeeze(0)  # image shape:[1, 1, 3, 32, 224, 224]
 
         return images
 
