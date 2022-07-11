@@ -7,6 +7,7 @@ from Swin_BERT_Semantics import Swin_BERT_Semantics
 
 
 in_video = st.file_uploader('Video Caption Test', type=['mp4'])
+out_caption = "None"
 if in_video is not None:
     st.video(in_video)
     tfile = tempfile.NamedTemporaryFile(delete=False)
@@ -26,8 +27,11 @@ if in_video is not None:
     output = model(images)
 
     generate_text = output.cpu().numpy().tolist()
-
     generate_converted = model.tokenizer.batch_decode(generate_text, skip_special_tokens=True)
-    st.write('The generated Caption is:')
-    st.info(generate_converted[0])
-    st.write('')
+    out_caption = generate_converted[0]
+
+    st.write('The generated caption is:')
+    st.info(out_caption)
+    st.write('Now, if you would, rate the generated caption:')
+    rating1 = st.slider('How accurate is the caption?', 0, 10, 0)
+
