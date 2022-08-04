@@ -6,6 +6,7 @@ import torch
 from csv import writer
 from Swin_BERT_Semantics import Swin_BERT_Semantics
 
+
 @st.cache
 def gen_caption(device,path_model,in_video):
     tfile = tempfile.NamedTemporaryFile(delete=False)
@@ -28,15 +29,20 @@ def gen_caption(device,path_model,in_video):
     out_caption = generate_converted[0]
     return out_caption
 
-
 in_video = st.file_uploader('Video Caption Test', type=['mp4'])
 out_caption = 'None'
-rating1 = 0
-user_caption = ''
+video_name = ''
+flag_num = 0
+
 if in_video is not None:
+    video_name = in_video.name
+    rating1 = 0
+    user_caption = ''
     st.video(in_video)
-    #out_caption = gen_caption('cpu','VASTA.ckpt',in_video)
-    out_caption = 'testcase'
+    out_caption = gen_caption('cpu','VASTA.ckpt',in_video)
+
+
+
 def append_list_as_row(file_name, list_of_elem):
     # Open file in append mode
     with open(file_name, 'a+', newline='') as write_obj:
@@ -45,6 +51,9 @@ def append_list_as_row(file_name, list_of_elem):
         # Add contents of list as last row in the csv file
         csv_writer.writerow(list_of_elem)
 
+
+
+
 if out_caption != 'None':
     st.write('The generated caption is:')
     st.info(out_caption)
@@ -52,6 +61,7 @@ if out_caption != 'None':
     rating1 = st.slider('How accurate is the caption?', 0, 10, 0)
     user_caption = st.text_input('How would you caption the video')
     clicked = st.button("Submit")
-    if(clicked):
-        append_list_as_row('ratings.csv', [rating1,user_caption])
+    if (clicked):
+        append_list_as_row('ratings.csv', [video_name, out_caption, rating1, user_caption])
+        clicked = False
         st.info('Thank you!')
