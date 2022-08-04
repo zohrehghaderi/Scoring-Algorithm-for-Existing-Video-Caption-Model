@@ -3,6 +3,7 @@ import numpy as np
 import tempfile
 import streamlit as st
 import torch
+from csv import writer
 from Swin_BERT_Semantics import Swin_BERT_Semantics
 
 @st.cache
@@ -34,8 +35,15 @@ rating1 = 0
 user_caption = ''
 if in_video is not None:
     st.video(in_video)
-    out_caption = gen_caption('cpu','VASTA.ckpt',in_video)
-
+    #out_caption = gen_caption('cpu','VASTA.ckpt',in_video)
+    out_caption = 'testcase'
+def append_list_as_row(file_name, list_of_elem):
+    # Open file in append mode
+    with open(file_name, 'a+', newline='') as write_obj:
+        # Create a writer object from csv module
+        csv_writer = writer(write_obj)
+        # Add contents of list as last row in the csv file
+        csv_writer.writerow(list_of_elem)
 
 if out_caption != 'None':
     st.write('The generated caption is:')
@@ -43,3 +51,7 @@ if out_caption != 'None':
     st.write('Now, if you would, rate the generated caption:')
     rating1 = st.slider('How accurate is the caption?', 0, 10, 0)
     user_caption = st.text_input('How would you caption the video')
+    clicked = st.button("Submit")
+    if(clicked):
+        append_list_as_row('ratings.csv', [rating1,user_caption])
+        st.info('Thank you!')
