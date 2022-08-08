@@ -6,6 +6,10 @@ import torch
 from csv import writer
 from Swin_BERT_Semantics import Swin_BERT_Semantics
 
+st.header('Video-Caption-Model')
+if 'selectedVideo' not in st.session_state:
+    st.write('no session state for selectedVideo')
+else: st.write(st.session_state.selcetedVideo)
 
 @st.cache
 def gen_caption(device,path_model,in_video):
@@ -29,7 +33,9 @@ def gen_caption(device,path_model,in_video):
     out_caption = generate_converted[0]
     return out_caption
 
-in_video = st.file_uploader('Video Caption Test', type=['mp4'])
+if 'selectedVideo' not in st.session_state:
+        in_video = st.file_uploader('Upload your own Video here or choose one from the list on the left hand side:', type=['mp4'], help='The video should be no longer than 10 sec. Only mp4-files will be accepted.')
+else: in_video = st.session_state.selectedVideo
 out_caption = 'None'
 video_name = ''
 flag_num = 0
@@ -57,11 +63,26 @@ def append_list_as_row(file_name, list_of_elem):
 if out_caption != 'None':
     st.write('The generated caption is:')
     st.info(out_caption)
-    st.write('Now, if you would, rate the generated caption:')
-    rating1 = st.slider('How accurate is the caption?', 0, 10, 0)
-    user_caption = st.text_input('How would you caption the video')
+
+    st.header('Please rate the generated caption to help improve the model:')
+
+    rating_match = st.radio("Does the description match the video?",('yes', 'to some degree', 'not at all'))
+    rating_capture = st.radio("Is everything important captured by the caption?",('yes', 'no'))
+    if rating_capture == 'no':
+        user_missing = st.text_input('What is missing?')
+    else: user_missing = 'empty'
+
+    rating_accuracy = st.select_slider('How accurate is the caption?',
+        options=['very vague','vague', 'decent','detailed', 'very detailed'],
+        value=('decent'))
+
+    rating_grammer = st.radio("Are there any grammatical errors in the caption?",('yes', 'no'), 1)
+
+    user_caption = st.text_input('Please provide your own caption of the video:')
+
     clicked = st.button("Submit")
+
     if (clicked):
-        append_list_as_row('ratings.csv', [video_name, out_caption, rating1, user_caption])
+        append_list_as_row('ratings.csv', [video_name, out_caption, rating_match, rating_capture, rating_accuracy, rating_grammer, user_caption])
         clicked = False
         st.info('Thank you!')
