@@ -63,17 +63,20 @@ def append_list_as_row(file_name, list_of_elem):
 
 def transform_ratings(rating_match,rating_capture,rating_accuracy,rating_grammar):
     percentage_accuracy = 0
-    if rating_match == 'yes': percentage_accuracy += 25
-    elif rating_match == 'to some degree': percentage_accuracy += 12.5
-
+    #35% gewicht
+    if rating_match == 'yes': percentage_accuracy += 35
+    elif rating_match == 'to some degree': percentage_accuracy += 17.5
+    #25%
     if rating_capture == 'yes': percentage_accuracy += 25
 
+    #25%
     if rating_accuracy == 'very detailed': percentage_accuracy += 25
     elif rating_accuracy == 'detailed': percentage_accuracy += 18.75
     elif rating_accuracy == 'decent': percentage_accuracy += 12.5
     elif rating_accuracy == 'vague': percentage_accuracy += 6.25
 
-    if rating_grammar == 'no': percentage_accuracy += 25
+    #15%
+    if rating_grammar == 'no': percentage_accuracy += 15
 
     return percentage_accuracy
 
