@@ -61,6 +61,21 @@ def append_list_as_row(file_name, list_of_elem):
         csv_writer.writerow(list_of_elem)
 
 
+def transform_ratings(rating_match,rating_capture,rating_accuracy,rating_grammar):
+    percentage_accuracy = 0
+    if rating_match == 'yes': percentage_accuracy += 25
+    elif rating_match == 'to some degree': percentage_accuracy += 12.5
+
+    if rating_capture == 'yes': percentage_accuracy += 25
+
+    if rating_accuracy == 'very detailed': percentage_accuracy += 25
+    elif rating_accuracy == 'detailed': percentage_accuracy += 18.75
+    elif rating_accuracy == 'decent': percentage_accuracy += 12.5
+    elif rating_accuracy == 'vague': percentage_accuracy += 6.25
+
+    if rating_grammar == 'no': percentage_accuracy += 25
+
+    return percentage_accuracy
 
 
 if out_caption != 'None':
@@ -68,24 +83,25 @@ if out_caption != 'None':
     st.info(out_caption)
 
     st.header('Please rate the generated caption to help improve the model:')
-
     rating_match = st.radio("Does the description match the video?",('yes', 'to some degree', 'not at all'))
+
     rating_capture = st.radio("Is everything important captured by the caption?",('yes', 'no'))
     if rating_capture == 'no':
         user_missing = st.text_input('What is missing?')
-    else: user_missing = 'empty'
+    else:
+        user_missing = 'empty'
 
     rating_accuracy = st.select_slider('How accurate is the caption?',
         options=['very vague','vague', 'decent','detailed', 'very detailed'],
         value=('decent'))
 
-    rating_grammer = st.radio("Are there any grammatical errors in the caption?",('yes', 'no'), 1)
+    rating_grammar = st.radio("Are there any grammatical errors in the caption?",('yes', 'no'), 1)
 
     user_caption = st.text_input('Please provide your own caption of the video:')
 
     clicked = st.button("Submit")
-
     if (clicked):
-        append_list_as_row('ratings.csv', [video_name, out_caption, rating_match, rating_capture, rating_accuracy, rating_grammer, user_caption])
+        percentage_accuracy = transform_ratings(rating_match,rating_capture,rating_accuracy,rating_grammar)
+        append_list_as_row('ratings.csv', [video_name, out_caption, rating_match, rating_capture, rating_accuracy, rating_grammar, user_caption, percentage_accuracy])
         clicked = False
         st.info('Thank you!')

@@ -1,3 +1,2 @@
-hash_video,generated_caption,rating_match,rating_capture,rating_accuracy,rating_grammer,user_caption
-example1.mp4,a man is talking about something,not at all,no,very vague,no,a cat is jumping
-example2.mp4,a group of people are swimming in a pool,to some degree,no,detailed,no,three dolphins are spinning in a pool
+video_name,generated_caption,rating_match,rating_capture,rating_accuracy,rating_grammer,user_caption,percentage
+video8798.mp4,a large fireworks display is going off,to some degree,yes,vague,no,asd,68.75
