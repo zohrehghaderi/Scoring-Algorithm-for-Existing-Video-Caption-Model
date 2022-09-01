@@ -32,10 +32,10 @@ for i in range (1, 5):
     
 
     if st.button("select this video", key='select'+str(i)):
-        st.session_state.selectedVideo = video_name
+        st.session_state['selectedVideo'] = video_name
     if countRating > 0:
         st.button("show ratings of this video", key='show'+str(i))
 
-st.write('Session State: ' + st.session_state.selectedVideo)
+st.write('Session State: ' + str(st.session_state['selectedVideo']))
 
 

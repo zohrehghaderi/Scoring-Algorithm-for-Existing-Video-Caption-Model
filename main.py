@@ -8,8 +8,9 @@ from Swin_BERT_Semantics import Swin_BERT_Semantics
 
 st.header('Video-Caption-Model')
 if 'selectedVideo' not in st.session_state:
-    st.write('no session state for selectedVideo')
-else: st.write(st.session_state.selcetedVideo)
+    st.session_state['selectedVideo'] = 0
+else:
+    st.write(st.session_state['selectedVideo'])
 
 @st.cache
 def gen_caption(device,path_model,in_video):
@@ -33,9 +34,11 @@ def gen_caption(device,path_model,in_video):
     out_caption = generate_converted[0]
     return out_caption
 
-if 'selectedVideo' not in st.session_state:
-        in_video = st.file_uploader('Upload your own Video here or choose one from the list on the left hand side:', type=['mp4'], help='The video should be no longer than 10 sec. Only mp4-files will be accepted.')
-else: in_video = st.session_state.selectedVideo
+
+if st.session_state['selectedVideo'] == 0:
+    in_video = st.file_uploader('Upload your own Video here or choose one from the list on the left hand side:', type=['mp4'], help='The video should be no longer than 10 sec. Only mp4-files will be accepted.')
+else:
+    in_video = st.session_state.selectedVideo
 out_caption = 'None'
 video_name = ''
 flag_num = 0
