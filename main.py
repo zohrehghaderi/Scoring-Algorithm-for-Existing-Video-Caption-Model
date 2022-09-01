@@ -12,7 +12,7 @@ if 'selectedVideo' not in st.session_state:
 else:
     st.write(st.session_state['selectedVideo'])
 
-@st.cache
+@st.experimental_memo
 def gen_caption(device,path_model,in_video):
     tfile = tempfile.NamedTemporaryFile(delete=False)
     tfile.write(in_video.read())
