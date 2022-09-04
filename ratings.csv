@@ -1,3 +1,3 @@
-hash_video,generated_caption,rating_match,rating_capture,rating_accuracy,rating_grammer,user_caption
-example1.mp4,a man is talking about something,not at all,no,very vague,no,a cat is jumping
-example2.mp4,a group of people are swimming in a pool,to some degree,no,detailed,no,three dolphins are spinning in a pool
+hash_video,generated_caption,rating_match,rating_capture,user_missing,rating_accuracy,rating_grammar,user_caption
+example1.mp4,a man is talking about something,not at all,no,a,very vague,no,a cat is jumping
+example2.mp4,a group of people are swimming in a pool,to some degree,no,a,detailed,no,three dolphins are spinning in a pool
