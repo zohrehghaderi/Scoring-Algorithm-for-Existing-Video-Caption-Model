@@ -108,6 +108,6 @@ if out_caption != 'None':
     clicked = st.button("Submit")
     if (clicked):
         percentage_accuracy = transform_ratings(rating_match,rating_capture,rating_accuracy,rating_grammar)
-        append_list_as_row('ratings.csv', [video_name, out_caption, rating_match, rating_capture, rating_accuracy, rating_grammar, user_caption, percentage_accuracy])
+        append_list_as_row('ratings.csv', [video_name, out_caption, rating_match, rating_capture, user_missing, rating_accuracy, rating_grammar, user_caption, percentage_accuracy])
         clicked = False
         st.info('Thank you!')
