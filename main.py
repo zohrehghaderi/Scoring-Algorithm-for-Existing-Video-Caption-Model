@@ -48,7 +48,8 @@ if in_video is not None:
     rating1 = 0
     user_caption = ''
     st.video(in_video)
-    out_caption = gen_caption('cpu','VASTA.ckpt',in_video)
+    #out_caption = gen_caption('cpu','VASTA.ckpt',in_video)
+    out_caption = 'TEST'
 
 
 
@@ -63,9 +64,11 @@ def append_list_as_row(file_name, list_of_elem):
 
 def transform_ratings(rating_match,rating_capture,rating_accuracy,rating_grammar):
     percentage_accuracy = 0
+
     #35% gewicht
     if rating_match == 'yes': percentage_accuracy += 35
     elif rating_match == 'to some degree': percentage_accuracy += 17.5
+
     #25%
     if rating_capture == 'yes': percentage_accuracy += 25
 
