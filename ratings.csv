@@ -1,4 +1,12 @@
-video_name,generated_caption,rating_match,rating_capture,user_missing,rating_accuracy,rating_grammar,user_caption,percentage
-video8798.mp4,a large fireworks display is going off,to some degree,yes,a,vague,no,asd,68.75
-video8798.mp4,a large fireworks display is going off,to some degree,yes,a,detailed,no,ye,81.25
-video8798.mp4,TEST,yes,no,a,decent,no,,62.5
+video_name,generated_caption,rating_match,rating_capture,user_missing,rating_accuracy,rating_grammer,user_caption,percentage
+video8798.mp4,TEST,to some degree,no,sdf,decent,yes,dsafg,30.0
+video8798.mp4,TEST,yes,yes,empty,decent,yes,asd,72.5
+video8798.mp4,TEST,yes,yes,empty,decent,no,ad,87.5
+video8798.mp4,TEST,yes,yes,empty,decent,no,ad,87.5
+video8798.mp4,TEST,yes,yes,empty,decent,no,ad,87.5
+video8798.mp4,TEST,yes,yes,empty,decent,no,ad,87.5
+video8798.mp4,TEST,yes,yes,empty,decent,no,ad,87.5
+video8798.mp4,TEST,yes,yes,empty,decent,no,ad,87.5
+video8798.mp4,TEST,yes,yes,empty,decent,no,ad,87.5
+video8798.mp4,TEST,yes,yes,empty,decent,no,ad,87.5
+video8798.mp4,TEST,yes,yes,empty,decent,no,ad,87.5
