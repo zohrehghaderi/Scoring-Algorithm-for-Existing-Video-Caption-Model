@@ -19,6 +19,7 @@ def count_ratings(video_name):
             count += 1
     return count
 
+
 def generate_charts(video_name):
     count = 0
     count_match_yes = 0
@@ -133,6 +134,33 @@ def generate_charts(video_name):
     return
 
 
+def get_ratings(video_name):
+    caption = "no caption"
+    rating_match = "no rating_match"
+    rating_capture = "no rating_capture"
+    user_missing = "empty"
+    rating_accuracy = "no rating_accuracy"
+    rating_grammer = "no rating_grammer"
+    user_caption = "no user caption"
+    percentage = -1
+    countRatings = 0
+
+    for i in range (1, len(rows)):
+        if rows[i][0] == video_name:
+            caption = rows[i][1]
+            rating_match = rows[i][2]
+            rating_capture = rows[i][3]
+            user_missing = rows[i][4]
+            rating_accuracy = rows[i][5]
+            rating_grammer = rows[i][6]
+            user_caption = rows[i][7]
+            percentage = rows[i][8]
+            countRatings = count_ratings(video_name)
+            break
+    return [video_name, caption, rating_match, rating_capture, user_missing, rating_accuracy, rating_grammer, user_caption, percentage, countRatings]
+
+
+
 for i in range (1, 5):
 
     video_name = 'example'+ str(i) + '.mp4'
@@ -144,13 +172,12 @@ for i in range (1, 5):
     st.video(video_bytes)
     st.write('ratings for this video: '+ str(countRating))
 
-    if countRating > 0:
-        if st.button("Generate Statistics for this video", key='stats'+str(i)):
-            generate_charts(video_name)
     if st.button("select this video", key='select'+str(i)):
-        st.session_state['selectedVideo'] = video_name
-    #if countRating > 0:
-    #    st.button("show ratings of this video", key='show'+str(i))
+        st.session_state['selectedVideo'] = get_ratings(video_name) 
 
-st.write('Session State: ' + str(st.session_state['selectedVideo']))
+   # if countRating > 0:
+       # if st.button("Generate Statistics for this video", key='stats'+str(i)):
+            #generate_charts(video_name)
+    
 
+#st.write('Session State: ' + str(st.session_state['selectedVideo']))

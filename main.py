@@ -5,14 +5,15 @@ import streamlit as st
 import torch
 from csv import writer
 from Swin_BERT_Semantics import Swin_BERT_Semantics
+import time
 
 st.header('Video-Caption-Model')
 if 'selectedVideo' not in st.session_state:
     st.session_state['selectedVideo'] = 0
-else:
-    st.write(st.session_state['selectedVideo'])
+#else:
+    #st.write(st.session_state['selectedVideo'])
 
-@st.cache
+@st.cache(show_spinner=False)
 def gen_caption(device,path_model,in_video):
     tfile = tempfile.NamedTemporaryFile(delete=False)
     tfile.write(in_video.read())
@@ -35,22 +36,43 @@ def gen_caption(device,path_model,in_video):
     return out_caption
 
 
-if st.session_state['selectedVideo'] == 0:
-    in_video = st.file_uploader('Upload your own Video here or choose one from the list on the left hand side:', type=['mp4'], help='The video should be no longer than 10 sec. Only mp4-files will be accepted.')
-else:
-    in_video = st.session_state.selectedVideo
+#wrapper um gen_caption um Text von Spinner selber bestimmen zu können
+def get_caption(device,path_model,in_video):
+    with st.spinner(text="generating caption"):
+        return gen_caption(device,path_model,in_video)
+
 out_caption = 'None'
 video_name = ''
 flag_num = 0
 
+in_video = st.file_uploader('Upload your own Video here or choose one from the list on the left hand side:', type=['mp4'], help='The video should be no longer than 10 sec. Only mp4-files will be accepted.')
 if in_video is not None:
-    video_name = in_video.name
-    rating1 = 0
-    user_caption = ''
     st.video(in_video)
-    #out_caption = gen_caption('cpu','VASTA.ckpt',in_video)
+    #out_caption = get_caption('cpu','VASTA.ckpt',in_video)
     out_caption = 'TEST'
+    video_name = out_caption
 
+else:  #falls ein video aus der liste ausgesucht wurde
+    if st.session_state['selectedVideo'] != 0:
+        if (st.button("use selected video")):
+            if st.session_state['selectedVideo'][1] != "no caption":
+                in_video = st.session_state['selectedVideo'][0]
+                out_caption = st.session_state['selectedVideo'][1]
+                video_name = st.session_state['selectedVideo'][0]
+
+                with st.spinner('generating caption'):
+                    time.sleep(3)
+
+                video_file = open('videos/'+ st.session_state['selectedVideo'][0], 'rb')
+                video_bytes = video_file.read()
+                st.video(video_bytes)
+            else: 
+                in_video = open('videos/'+ st.session_state['selectedVideo'][0], 'rb')
+                #in_video = video_file.read()
+                #st.video(in_video)
+                #out_caption = get_caption('cpu','VASTA.ckpt',in_video)
+                out_caption = 'TEST'
+                video_name = out_caption
 
 
 def append_list_as_row(file_name, list_of_elem):
