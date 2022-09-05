@@ -50,7 +50,7 @@ if in_video is not None:
     st.video(in_video)
     #out_caption = get_caption('cpu','VASTA.ckpt',in_video)
     out_caption = 'TEST'
-    video_name = out_caption
+    video_name = in_video.name
 
 else:  #falls ein video aus der liste ausgesucht wurde
     if st.session_state['selectedVideo'] != 0:
@@ -58,7 +58,7 @@ else:  #falls ein video aus der liste ausgesucht wurde
             in_video = open('videos/'+ st.session_state['selectedVideo'][0], 'rb')
             #out_caption = get_caption('cpu','VASTA.ckpt',in_video)
             out_caption = 'TEST'
-            video_name = out_caption
+            video_name = in_video.name
 
             with st.spinner('generating caption'):
                     time.sleep(3)

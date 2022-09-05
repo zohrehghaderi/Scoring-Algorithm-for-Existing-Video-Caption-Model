@@ -11,3 +11,5 @@ video8798.mp4,TEST,yes,yes,empty,decent,no,ad,87.5
 video8798.mp4,TEST,yes,yes,empty,decent,no,ad,87.5
 video8798.mp4,TEST,yes,yes,empty,decent,no,ad,87.5
 example4.mp4,TEST,yes,no,dddd,vague,yes,dasd,41.25
+TEST,TEST,not at all,no,,decent,yes,,12.5
+example4.mp4,TEST,to some degree,no,,decent,no,asd,45.0
