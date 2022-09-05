@@ -1,15 +1,16 @@
 import Dataloader
-import numpy as np
 import tempfile
 import streamlit as st
 import torch
 from csv import writer
 from Swin_BERT_Semantics import Swin_BERT_Semantics
-import time
 
 st.header('Video-Caption-Model')
 if 'selectedVideo' not in st.session_state:
     st.session_state['selectedVideo'] = 0
+
+if 'useClicked' not in st.session_state:
+    st.session_state['useClicked'] = False
 #else:
     #st.write(st.session_state['selectedVideo'])
 
@@ -46,22 +47,21 @@ video_name = ''
 flag_num = 0
 
 in_video = st.file_uploader('Upload your own Video here or choose one from the list on the left hand side:', type=['mp4'], help='The video should be no longer than 10 sec. Only mp4-files will be accepted.')
+
 if in_video is not None:
     st.video(in_video)
     #out_caption = get_caption('cpu','VASTA.ckpt',in_video)
     out_caption = 'TEST'
     video_name = in_video.name
 
-else:  #falls ein video aus der liste ausgesucht wurde
+else:#falls ein video aus der liste ausgesucht wurde
     if st.session_state['selectedVideo'] != 0:
-        if (st.button("use selected video")):
+        if (st.button("use selected video") or st.session_state["useClicked"] == True):
+            st.session_state['useClicked'] = True
             in_video = open('videos/'+ st.session_state['selectedVideo'][0], 'rb')
             #out_caption = get_caption('cpu','VASTA.ckpt',in_video)
             out_caption = 'TEST'
             video_name = in_video.name
-
-            with st.spinner('generating caption'):
-                    time.sleep(3)
 
             video_file = open('videos/'+ st.session_state['selectedVideo'][0], 'rb')
             video_bytes = video_file.read()
@@ -123,6 +123,7 @@ if out_caption != 'None':
 
     clicked = st.button("Submit")
     if (clicked):
+        st.session_state["useClicked"] = False
         percentage_accuracy = transform_ratings(rating_match,rating_capture,rating_accuracy,rating_grammar)
         append_list_as_row('ratings.csv', [video_name, out_caption, rating_match, rating_capture, user_missing, rating_accuracy, rating_grammar, user_caption, percentage_accuracy])
         clicked = False
