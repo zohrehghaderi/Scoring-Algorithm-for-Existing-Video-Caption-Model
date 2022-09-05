@@ -39,8 +39,8 @@ def gen_caption(device,path_model,in_video):
 
 #wrapper um gen_caption um Text von Spinner selber bestimmen zu können
 def get_caption(device,path_model,in_video):
-    with st.spinner(text="generating caption"):
-        return gen_caption(device,path_model,in_video)
+    #with st.spinner(text="generating caption"):
+    return gen_caption(device,path_model,in_video)
 
 out_caption = 'None'
 video_name = ''
@@ -50,8 +50,8 @@ in_video = st.file_uploader('Upload your own Video here or choose one from the l
 
 if in_video is not None:
     st.video(in_video)
-    #out_caption = get_caption('cpu','VASTA.ckpt',in_video)
-    out_caption = 'TEST'
+    out_caption = get_caption('cpu','VASTA.ckpt',in_video)
+    #out_caption = 'TEST'
     video_name = in_video.name
 
 else:#falls ein video aus der liste ausgesucht wurde
@@ -59,14 +59,14 @@ else:#falls ein video aus der liste ausgesucht wurde
         if (st.button("use selected video") or st.session_state["useClicked"] == True):
             st.session_state['useClicked'] = True
             in_video = open('videos/'+ st.session_state['selectedVideo'][0], 'rb')
-            #out_caption = get_caption('cpu','VASTA.ckpt',in_video)
-            out_caption = 'TEST'
+            out_caption = get_caption('cpu','VASTA.ckpt',in_video)
+            #out_caption = 'TEST'
             video_name = in_video.name[7:]
 
             video_file = open('videos/'+ st.session_state['selectedVideo'][0], 'rb')
             video_bytes = video_file.read()
             st.video(video_bytes)
-
+            
 
 
 def append_list_as_row(file_name, list_of_elem):
