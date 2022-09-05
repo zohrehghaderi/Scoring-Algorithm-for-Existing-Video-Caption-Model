@@ -70,7 +70,7 @@ def generate_charts(video_name):
                 case 'no':
                     count_grammatical_errors_no += 1
             user_captions.append(rows[i][7])
-            avg_percentage += rows[i][8]
+            avg_percentage += float(rows[i][8])
 
     avg_percentage = avg_percentage/count
 
@@ -149,8 +149,8 @@ for i in range (1, 5):
             generate_charts(video_name)
     if st.button("select this video", key='select'+str(i)):
         st.session_state['selectedVideo'] = video_name
-    if countRating > 0:
-        st.button("show ratings of this video", key='show'+str(i))
+    #if countRating > 0:
+    #    st.button("show ratings of this video", key='show'+str(i))
 
 st.write('Session State: ' + str(st.session_state['selectedVideo']))
 
