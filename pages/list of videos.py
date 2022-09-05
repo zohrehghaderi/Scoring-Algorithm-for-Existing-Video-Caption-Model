@@ -145,7 +145,7 @@ for i in range (1, 5):
     st.write('ratings for this video: '+ str(countRating))
 
     if countRating > 0:
-        if st.button("Generate Statistics for this video"):
+        if st.button("Generate Statistics for this video", key='stats'+str(i)):
             generate_charts(video_name)
     if st.button("select this video", key='select'+str(i)):
         st.session_state['selectedVideo'] = video_name
