@@ -61,7 +61,7 @@ else:#falls ein video aus der liste ausgesucht wurde
             in_video = open('videos/'+ st.session_state['selectedVideo'][0], 'rb')
             #out_caption = get_caption('cpu','VASTA.ckpt',in_video)
             out_caption = 'TEST'
-            video_name = in_video.name
+            video_name = in_video.name[7:]
 
             video_file = open('videos/'+ st.session_state['selectedVideo'][0], 'rb')
             video_bytes = video_file.read()

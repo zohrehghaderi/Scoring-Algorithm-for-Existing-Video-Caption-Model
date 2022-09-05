@@ -41,35 +41,34 @@ def generate_charts(video_name):
     for i in range(1, len(rows)):
         if rows[i][0] == video_name:
             count += 1
-            match rows[i][2]:
-                case 'yes':
-                    count_match_yes += 1
-                case 'to some degree':
-                    count_match_tosomedegree += 1
-                case 'not at all':
-                    count_match_notatall += 1
-            match rows[i][3]:
-                case 'yes':
-                    count_captured_yes += 1
-                case 'no':
-                    count_captured_no += 1
-                    user_missing.append(rows[i][4])
-            match rows[i][5]:
-                case 'very detailed':
-                    count_accuracy_verydetailed += 1
-                case 'detailed':
-                    count_accuracy_detailed += 1
-                case 'decent':
-                    count_accuracy_decent += 1
-                case 'vague':
-                    count_accuracy_vague += 1
-                case 'very vague':
-                    count_accuracy_veryvague += 1
-            match rows[i][6]:
-                case 'yes':
-                    count_grammatical_errors_yes += 1
-                case 'no':
-                    count_grammatical_errors_no += 1
+            if rows[i][2] == 'yes':
+                count_match_yes += 1
+            elif rows[i][2] == 'to some degree':
+                count_match_tosomedegree += 1
+            elif rows[i][2] == 'not at all':
+                count_match_notatall += 1
+
+            if rows[i][3] == 'yes':
+                count_captured_yes += 1
+            elif rows[i][3] == 'no':
+                count_captured_no += 1
+                user_missing.append(rows[i][4])
+
+            if rows[i][5] == 'very detailed':
+                count_accuracy_verydetailed += 1
+            elif rows[i][5] == 'detailed':
+                count_accuracy_detailed += 1
+            elif rows[i][5] == 'decent':
+                count_accuracy_decent += 1
+            elif rows[i][5] == 'vague':
+                count_accuracy_vague += 1
+            elif rows[i][5] == 'very vague':
+                count_accuracy_veryvague += 1
+
+            if rows[i][6] == 'yes':
+                count_grammatical_errors_yes += 1
+            elif rows[i][6] == 'no':
+                count_grammatical_errors_no += 1
             user_captions.append(rows[i][7])
             avg_percentage += float(rows[i][8])
 
