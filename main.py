@@ -55,24 +55,18 @@ if in_video is not None:
 else:  #falls ein video aus der liste ausgesucht wurde
     if st.session_state['selectedVideo'] != 0:
         if (st.button("use selected video")):
-            if st.session_state['selectedVideo'][1] != "no caption":
-                in_video = st.session_state['selectedVideo'][0]
-                out_caption = st.session_state['selectedVideo'][1]
-                video_name = st.session_state['selectedVideo'][0]
+            in_video = open('videos/'+ st.session_state['selectedVideo'][0], 'rb')
+            #out_caption = get_caption('cpu','VASTA.ckpt',in_video)
+            out_caption = 'TEST'
+            video_name = out_caption
 
-                with st.spinner('generating caption'):
+            with st.spinner('generating caption'):
                     time.sleep(3)
 
-                video_file = open('videos/'+ st.session_state['selectedVideo'][0], 'rb')
-                video_bytes = video_file.read()
-                st.video(video_bytes)
-            else: 
-                in_video = open('videos/'+ st.session_state['selectedVideo'][0], 'rb')
-                #in_video = video_file.read()
-                #st.video(in_video)
-                #out_caption = get_caption('cpu','VASTA.ckpt',in_video)
-                out_caption = 'TEST'
-                video_name = out_caption
+            video_file = open('videos/'+ st.session_state['selectedVideo'][0], 'rb')
+            video_bytes = video_file.read()
+            st.video(video_bytes)
+            
 
 
 def append_list_as_row(file_name, list_of_elem):
