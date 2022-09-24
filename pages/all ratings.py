@@ -11,7 +11,8 @@ for row in csvreader:
         rows.append(row)
 df = pd.DataFrame(rows, columns=['video name','generated caption','does it match','rating capture','what is missing','how accurate','grammar errors','user caption','percentage'])
 #iloc removes first row
-st.table(df.iloc[1:])
+if st.button('Show table', key=1):
+    st.table(df.iloc[1:])
 
 def generate_charts():
     count = 0
@@ -68,55 +69,61 @@ def generate_charts():
     avg_percentage = avg_percentage/count
 
     st.write('Does the description match the video?')
-    chart_match = pd.DataFrame({
-        'Count': [count_match_yes, count_match_tosomedegree, count_match_notatall],
-        'Options': ['yes', 'to some degree', 'not at all']
-    })
-    bar_chart1 = alt.Chart(chart_match).mark_bar().encode(
-        y='Count:Q',
-        x='Options:O',
-    )
-    st.altair_chart(bar_chart1, use_container_width=True)
+    if st.button('Show chart', key=2):
+        chart_match = pd.DataFrame({
+            'Count': [count_match_yes, count_match_tosomedegree, count_match_notatall],
+            'Options': ['yes', 'to some degree', 'not at all']
+        })
+        bar_chart1 = alt.Chart(chart_match).mark_bar().encode(
+            y='Count:Q',
+            x='Options:O',
+        )
+        st.altair_chart(bar_chart1, use_container_width=True)
 
 
     st.write('Is everything important captured by the caption?')
-    chart_captured = pd.DataFrame({
-        'Count': [count_captured_yes, count_captured_no],
-        'Options': ['yes', 'no']
-    })
-    bar_chart2 = alt.Chart(chart_captured).mark_bar().encode(
-        y='Count:Q',
-        x='Options:O',
-    )
-    st.altair_chart(bar_chart2, use_container_width=True)
+    if st.button('Show chart', key=3):
+        chart_captured = pd.DataFrame({
+            'Count': [count_captured_yes, count_captured_no],
+            'Options': ['yes', 'no']
+        })
+        bar_chart2 = alt.Chart(chart_captured).mark_bar().encode(
+            y='Count:Q',
+            x='Options:O',
+        )
+        st.altair_chart(bar_chart2, use_container_width=True)
     st.write('What is missing?')
-    st.write(user_missing)
+    if st.button('Show chart', key=4):
+        st.write(user_missing)
 
     st.write('How accurate is the caption?')
-    chart_accuracy = pd.DataFrame({
-        'Count': [count_accuracy_veryvague, count_accuracy_vague, count_accuracy_decent, count_accuracy_detailed,
-                  count_accuracy_verydetailed],
-        'Options': ['very vague', 'vague', 'decent', 'detailed', 'very detailed']
-    })
-    bar_chart3 = alt.Chart(chart_accuracy).mark_bar().encode(
-        y='Count:Q',
-        x='Options:O',
-    )
-    st.altair_chart(bar_chart3, use_container_width=True)
+    if st.button('Show chart', key=5):
+        chart_accuracy = pd.DataFrame({
+            'Count': [count_accuracy_veryvague, count_accuracy_vague, count_accuracy_decent, count_accuracy_detailed,
+                    count_accuracy_verydetailed],
+            'Options': ['very vague', 'vague', 'decent', 'detailed', 'very detailed']
+        })
+        bar_chart3 = alt.Chart(chart_accuracy).mark_bar().encode(
+            y='Count:Q',
+            x='Options:O',
+        )
+        st.altair_chart(bar_chart3, use_container_width=True)
 
     st.write('Are there any grammatical errors in the caption?')
-    chart_grammar = pd.DataFrame({
-        'Count': [count_grammatical_errors_yes,count_grammatical_errors_no],
-        'Options': ['yes', 'no']
-    })
-    bar_chart4 = alt.Chart(chart_grammar).mark_bar().encode(
-        y='Count:Q',
-        x='Options:O',
-    )
-    st.altair_chart(bar_chart4, use_container_width=True)
+    if st.button('Show chart', key=6):
+        chart_grammar = pd.DataFrame({
+            'Count': [count_grammatical_errors_yes,count_grammatical_errors_no],
+            'Options': ['yes', 'no']
+        })
+        bar_chart4 = alt.Chart(chart_grammar).mark_bar().encode(
+            y='Count:Q',
+            x='Options:O',
+        )
+        st.altair_chart(bar_chart4, use_container_width=True)
 
     st.write('Please provide your own caption of the video')
-    st.write(user_captions)
+    if st.button('Show chart', key=7):
+        st.write(user_captions)
 
 
 
